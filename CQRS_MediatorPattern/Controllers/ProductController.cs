@@ -34,7 +34,7 @@ namespace CQRS_MediatorPattern.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(DeleteProductByIdCommand deleteCommand)
         {
-            return Ok(await Mediator.Send(deleteCommand.Id));
+            return Ok(await Mediator.Send(deleteCommand));
         }
 
         [HttpPut("{id}")]

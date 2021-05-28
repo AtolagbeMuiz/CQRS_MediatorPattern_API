@@ -13,6 +13,8 @@ using System.Linq;
 using System.Reflection;
 using MediatR;
 using System.Threading.Tasks;
+using CQRS_MediatorPattern.Context;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace CQRS_MediatorPattern
@@ -31,8 +33,11 @@ namespace CQRS_MediatorPattern
         {
 
             services.AddControllers();
+            services.AddDbContext<ApplicationDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IApplicationDBContext>(provider => provider.GetService<ApplicationDBContext>());
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CQRS_MediatorPattern", Version = "v1" });

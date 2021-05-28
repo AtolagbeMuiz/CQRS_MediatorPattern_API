@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CQRS_MediatorPattern.Features.ProductFeatures.Queries;
 
 namespace CQRS_MediatorPattern.Controllers
 {
@@ -29,5 +30,29 @@ namespace CQRS_MediatorPattern.Controllers
         {
             return Ok(await Mediator.Send(command));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(DeleteProductByIdCommand deleteCommand)
+        {
+            return Ok(await Mediator.Send(deleteCommand.Id));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdateProductCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+            return Ok(await Mediator.Send(command));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await Mediator.Send(new GetAllProductsQuery()));
+        }
+
     }
 }

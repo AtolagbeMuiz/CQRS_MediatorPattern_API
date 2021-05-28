@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CQRS_MediatorPattern.Context
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : DbContext, IApplicationDBContext
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
             : base(options)

@@ -22,7 +22,8 @@ namespace CQRS_MediatorPattern.Features.ProductFeatures.Commands
                 public async Task<int> Handle(DeleteProductByIdCommand command, CancellationToken cancellationToken)
                 {
                     var product = await _context.Product.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
-                    if (product == null) return default;
+                    if (product == null) 
+                    return default;
                     _context.Product.Remove(product);
                     await _context.SaveChangesAsync();
                     return product.Id;

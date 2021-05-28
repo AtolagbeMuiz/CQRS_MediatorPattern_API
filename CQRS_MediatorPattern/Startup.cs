@@ -38,6 +38,11 @@ namespace CQRS_MediatorPattern
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "localhost:6379";
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CQRS_MediatorPattern", Version = "v1" });

@@ -19,7 +19,7 @@ namespace CQRS_MediatorPattern.Controllers
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-      
+
         /// <summary>
         /// Creates a New Product.
         /// </summary>
@@ -54,5 +54,11 @@ namespace CQRS_MediatorPattern.Controllers
             return Ok(await Mediator.Send(new GetAllProductsQuery()));
         }
 
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            return Ok(await Mediator.Send(new GetProductByIdQuery { Id = id }));
+        }
     }
 }
